@@ -29,9 +29,9 @@ const typeDefs = `#graphql
     }
 
     type Mutation {
-        createProduct(productInput: ProductInput)
-        updateProduct(ID: ID!, productInput: ProductInput)
-        deleteProduct(ID: ID!)
+        createProduct(productInput: ProductInput): Product
+        updateProduct(ID: ID!, productInput: ProductInput): Product
+        deleteProduct(ID: ID!): String
     }
 `;
 
