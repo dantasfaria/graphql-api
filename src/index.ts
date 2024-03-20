@@ -2,9 +2,7 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import { connect } from 'mongoose';
 import Product from "../models/product.js";
-
-const MONGODB = "mongodb+srv://dantasfariag:255AWY22AVG@product.pr9pkfh.mongodb.net/Product?retryWrites=true&w=majority";
-
+const MONGODB = "mongodb+srv://dantasfariag:255awy22avg@product.pr9pkfh.mongodb.net/Product?retryWrites=true&w=majority";
 const typeDefs = `#graphql
     type Product {
         _id: String
@@ -31,7 +29,7 @@ const typeDefs = `#graphql
     type Mutation {
         createProduct(productInput: ProductInput): Product
         updateProduct(ID: ID!, productInput: ProductInput): Product
-        deleteProduct(ID: ID!): String
+        deleteProduct(ID: ID!): String!
     }
 `;
 
@@ -50,7 +48,7 @@ const resolvers = {
 
             return res._id;
         },
-        async updateProduct(_, {ID, bookInput: { name, description, price, quantity, location }}) {
+        async updateProduct(_, {ID, productInput: { name, description, price, quantity, location }}) {
             await Product.updateOne({ _id: ID }, {$set: { name, description, price, quantity, location }})
 
             return ID;
